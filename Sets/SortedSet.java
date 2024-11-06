@@ -1,8 +1,9 @@
+
 /*  Student information for assignment:
  *
- *  On <MY> honor, <Siddharth Potta > ), 
+ *  On <MY> honor, <Siddharth Potta > , <Samhith Konyala>
  *  this programming assignment is <MY> own work
- *  and <I> have not provided this code to any other student.
+ *  and <We> have not provided this code to any other student.
  *
  *  Number of slip days used: 0
  *
@@ -10,10 +11,10 @@
  *  UTEID: sp55697
  *  email address: siddharthpotta@gmail.com
  *  TA name: Bersam
- *  
- *  Student 2 
- *  UTEID:
- *  email address:   
+ *
+ *  Student 2
+ *  UTEID: sk62423
+ *  email address: samhith.konyala@gmail.com
  */
 
 import java.util.Iterator;
@@ -35,7 +36,7 @@ import java.util.ArrayList;
 public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     // QUESTIONS
     // should i make a binary search and then make a get helper to make add faster?
-        // is my add all good or is there a better way to do it
+    // is my add all good or is there a better way to do it
 
     private ArrayList<E> myCon;
 
@@ -58,17 +59,17 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         myCon = new ArrayList<>();
         // for each item we add, we are sorting.
         for (E value : other) {
-            
+
             int index = get(value, 0, size());
             // get the index of where we shoudl add the value
-            
+
             if (index <= 0) {
                 // if index is negative, then we can add it and we add at that location.
                 myCon.add(-index, value);
             }
         }
     }
-    
+
     /** Order O(N)
      * Add an item to this set.
      * <br> item != null
@@ -79,18 +80,17 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
     public boolean add(E item) {
         // precon
         if (item == null) {
-            throw new IllegalArgumentException("argumetn can't be null");
+            throw new IllegalArgumentException("argument can't be null");
         }
-        // gets the index to add
-        int index = get(item, 0, size());
-        // if positive then alr contain ( special case for =-0)
-        if (index >= 0 && size() != 0) {
-            return false;
+        // finds if item is already there
+        if (!contains(item)) {
+            int index = get(item, 0, size());
+            myCon.add(-index, item);
+            return true;
         }
-        myCon.add(-index, item);
-        return true;
+        return false;
     }
-        /**
+    /**
      * Remove the specified item from this set if it is present.
      * pre: item != null
      * @param item the item to remove from the set. item may not equal null.
@@ -101,25 +101,25 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (item == null) {
             throw new IllegalArgumentException("argument can't be null");
         }
-        // looks for index of elemetn
+        // looks for index of element
         if (size() > 0) {
-            int index = get(item, 0, size());   
+            int index = get(item, 0, size());
             if (index >= 0) {
                 // if elem exists, then removes it
                 myCon.remove(index);
                 return true;
             }
         }
-        
+
         return false;
     }
     /** Order O(N)
-      * A union operation. Add all items of otherSet that 
-      * are not already present in this set to this set.
-      * @param otherSet != null
-      * @return true if this set changed as a result of this operation, 
-      * false otherwise.
-      */
+     * A union operation. Add all items of otherSet that
+     * are not already present in this set to this set.
+     * @param otherSet != null
+     * @return true if this set changed as a result of this operation,
+     * false otherwise.
+     */
     public boolean addAll(ISet<E> otherSet) {
         // precon 
         if (otherSet == null) {
@@ -128,53 +128,55 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         ArrayList<E> newMyCon = new ArrayList<>();
         SortedSet<E> other;
         if (otherSet.getClass() != getClass()) {
-            // if ohterSet is sorted we can add all easier;
+            // if otherSet is sorted we can add all easier;
             other = new SortedSet<E>(otherSet);
         } else {
             other = (SortedSet<E>) otherSet;
         }
-        ArrayList<E> otherCon = other.myCon;     
+        ArrayList<E> otherCon = other.myCon;
         boolean changed = updateNewArrayList(newMyCon, 0, 0, otherCon);
-            // if we chantged the list, then we will upate myCon
-            if (changed) {
-                myCon = newMyCon;
-            }
-            return changed;
+        // if we changed the list, then we will update myCon
+        if (changed) {
+            myCon = newMyCon;
+        }
+        return changed;
     }
-    
-    /** 
+
+    /**
      * Fills an array making the union of two arrays without duplicates
      */
     private boolean updateNewArrayList(ArrayList<E> newMyCon, int index1, int index2,
-            ArrayList<E> otherCon) {
+                                       ArrayList<E> otherCon) {
         boolean changed = false;
         while (index1 < size() && index2 < otherCon.size()) {
-            // compares elemetns in this and other & adds smaller elemtn
+            // compares elements in this and other & adds smaller element
             if (myCon.get(index1).compareTo(otherCon.get(index2)) < 0) {
                 newMyCon.add(myCon.get(index1));
                 index1++;
             } else if (myCon.get(index1).compareTo(otherCon.get(index2)) > 0) {
-                newMyCon.add(myCon.get(index2));
-                // if we add something from the ohter array then we modified
+                newMyCon.add(otherCon.get(index2));
+                // if we add something from the other array then we modified
                 changed = true;
                 index2++;
             } else {
-                // if elemetns are equal, just add one of them 
+                // if elements are equal, just add one of them
                 newMyCon.add(myCon.get(index1));
                 index2++;
                 index1++;
             }
         }
-        // ad any remaining elements
-        fillRest(newMyCon, index1, myCon);
-        if (index2 < otherCon.size()) {
+        // add any remaining elements
+        if (index1 < size()) {
+            fillRest(newMyCon, index1, myCon);
+        }
+        else if (index2 < otherCon.size()) {
             fillRest(newMyCon, index2, otherCon);
             changed = true;
         }
         return changed;
     }
-    
-    /** 
+
+    /**
      * fills an array with the items from another array starting from an index
      */
     private void fillRest (ArrayList<E> newMyCon, int start, ArrayList<E> curr) {
@@ -182,7 +184,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             newMyCon.add(curr.get(i));
         }
     }
-    
+
     /** ORDER O(1)
      * Return the number of elements of this set.
      * pre: none
@@ -215,7 +217,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         if (size() == 0) {
             return false;
         }
-        return get(item, 0, size()) >= 0;
+        return get(item, 0, size()) > 0 || myCon.getFirst().equals(item);
     }
 
     /** Order O(N)
@@ -254,17 +256,17 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         }
         // we can only return true if we check through all values in otherCon
         return index2 == otherCon.size();
-        
+
     }
-    
+
     /** oRDER O(LOG(N))
      * Return the index of the specified item in this SortedSet.
      * returns -insert Index if the item is not found. where insertIndex is the index to place the 
      * item if it were to be added.
      * pre: the size of myCon is greater than 0
-    **/ 
+     **/
     private int get(E item, int start, int stop) {
-        
+
         //base case
         if (start >= stop) {
             if (start == size()) {
@@ -282,7 +284,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
             return get(item, pos + 1, stop);
         }
     }
-    
+
     /** O(1)
      * Return the smallest element in this SortedSet.
      * <br> pre: size() != 0
@@ -340,12 +342,12 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         return false;
     }
 
-        /**
+    /**
      * Create a new set that is the difference of this set and otherSet. 
      * Return an ISet of elements that are in this Set but not in otherSet. 
      * Also called the relative complement. 
      * <br>Example: If ISet A contains [X, Y, Z] and ISet B contains [W, Z] 
-       * B.difference(A) would return an ISet with elements [W]. 
+     * B.difference(A) would return an ISet with elements [W].
      * <br>pre: otherSet != null
      * <br>post: returns a set that is the difference of this set and otherSet.
      * Neither this set or otherSet are altered as a result of this operation.
@@ -360,17 +362,17 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         // if current set is sorted, then use it, else, make a new sorted set
 
         SortedSet<E> other = (otherSet.getClass() != getClass()) ? new SortedSet<E>(otherSet)
-                : (SortedSet<E>) otherSet;       
+                : (SortedSet<E>) otherSet;
         return updateDifference(0, 0, (other).myCon,
                 new ArrayList<>());
-        
-        
+
+
     }
 
 
     // helper method that returns a set that is the difference of this set and otherSet
-    private ISet<E> updateDifference(int index, int index2, ArrayList<E> otherCon,               
-    ArrayList<E> toReturn) {
+    private ISet<E> updateDifference(int index, int index2, ArrayList<E> otherCon,
+                                     ArrayList<E> toReturn) {
         while (index < size() && index2 < otherCon.size()) {
             // if equal then skip both
             if (myCon.get(index).equals(otherCon.get(index2))) {
@@ -393,11 +395,11 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         result.myCon = toReturn;
         return result;
     }
-            
-        
-        
-    
-    
+
+
+
+
+
 
     /** ORDER O(N)
      * create a new set that is the intersection of this set and otherSet.
@@ -419,13 +421,13 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
                 : (SortedSet<E>) otherSet;
         ArrayList<E> toReturn = new ArrayList<>();
         ArrayList<E> otherCon = ((SortedSet<E>) other).myCon;
-                  
+
         return updateIntersection(0, 0, otherCon, toReturn);
-         
+
     }
 
     private ISet<E> updateIntersection(int index, int index2, ArrayList<E> otherCon,
-            ArrayList<E> toReturn) {
+                                       ArrayList<E> toReturn) {
         while (index < size() && index2 < otherCon.size()) {
             if (myCon.get(index).equals(otherCon.get(index2))) {
                 toReturn.add(myCon.get(index));
@@ -451,7 +453,7 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
      */
     public Iterator<E> iterator() {
         return myCon.iterator();
-    } 
+    }
 
     /** ORDER O(N)
      * Create a new set that is the union of this set and otherSet.
@@ -470,14 +472,14 @@ public class SortedSet<E extends Comparable<? super E>> extends AbstractSet<E> {
         SortedSet<E> other = (otherSet.getClass() != getClass()) ? new SortedSet<E>(otherSet)
                 : (SortedSet<E>) otherSet;
         ArrayList<E> otherCon = ((SortedSet<E>) other).myCon;
-       
-        // if ohterSet is sorted we can add all easier;
+
+        // if otherSet is sorted we can add all easier;
         ArrayList<E> toReturn = new ArrayList<>();
         updateNewArrayList(toReturn, 0, 0, otherCon);
         SortedSet<E> result = new SortedSet<>();
         result.myCon = toReturn;
-        return result;            
-        
+        return result;
+
     }
 
 
