@@ -1,19 +1,19 @@
 /*  Student information for assignment:
  *
- *  On <MY|OUR> honor, <NAME1> and <NAME2), 
- *  this programming assignment is <MY|OUR> own work
- *  and <I|WE> have not provided this code to any other student.
+ *  On <MY> honor, <Siddharth Potta > , <Samhith Konyala>
+ *  this programming assignment is <MY> own work
+ *  and <We> have not provided this code to any other student.
  *
- *  Number of slip days used: 2
+ *  Number of slip days used: 0
  *
  *  Student 1 (Student whose Canvas account is being used)
  *  UTEID: sp55697
- *  email address: sidddharthpotta@gmail.com
+ *  email address: siddharthpotta@gmail.com
  *  TA name: Bersam
- *  
- *  Student 2 
- *  UTEID:
- *  email address:   
+ *
+ *  Student 2
+ *  UTEID: sk62423
+ *  email address: samhith.konyala@gmail.com
  */
 
 import java.util.Iterator;
