@@ -4,7 +4,7 @@
  *  this programming assignment is <MY> own work
  *  and <I> have not provided this code to any other student.
  *
- *  Number of slip days used: 0
+ *  Number of slip days used: 2
  *
  *  Student 1 (Student whose Canvas account is being used)
  *  UTEID: sp55697
@@ -132,8 +132,6 @@ public abstract class AbstractSet<E> implements ISet<E> {
      */
     public boolean equals(Object other) {
         if (other instanceof ISet<?>) {
-
-            // NEED TO FIX ***************** 
             ISet<?> otherSet = (ISet<?>) other;
             // if they both contain eachothers' elemetns, then equal
             if (size() != otherSet.size()) {

@@ -4,7 +4,7 @@
  *  this programming assignment is <MY|OUR> own work
  *  and <I|WE> have not provided this code to any other student.
  *
- *  Number of slip days used:
+ *  Number of slip days used: 2
  *
  *  Student 1 (Student whose Canvas account is being used)
  *  UTEID: sp55697
@@ -40,7 +40,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         myCon = new ArrayList<E>();
     }
     
-    /**
+    /** Order O(N)
      * Add an item to this set.
      * <br> item != null
      * @param item the item to be added to this set. item may not equal null.
@@ -59,7 +59,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return false;
     }
     
-    /**
+    /** O(1)
      * Return the number of elements of this set.
      * pre: none
      * @return the number of items in this set
@@ -68,7 +68,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return myCon.size();
     }
     
-    /**
+    /** Order O(1)
      * Return an Iterator object for the elements of this set.
      * pre: none
      * @return an Iterator object for the elements of this set
@@ -77,7 +77,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return myCon.iterator();
     }
 
-    /**
+    /** Order O(N)
      * Make this set empty.
      * <br>pre: none
      * <br>post: size() = 0
@@ -86,7 +86,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         myCon.clear();
     }
 
-    /**
+    /** Order O(N^2)
      * Create a new set that is the union of this set and otherSet.
      * <br>pre: otherSet != null
      * <br>post: returns a set that is the union of this set and otherSet.
@@ -107,7 +107,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return union;
     }
 
-    /**
+    /** Order O(N^2)
      * create a new set that is the intersection of this set and otherSet.
      * <br>pre: otherSet != null<br>
      * <br>post: returns a set that is the intersection of this set 
@@ -133,7 +133,7 @@ public class UnsortedSet<E> extends AbstractSet<E> {
         return intersection;
     }
 
-    /**
+    /** order O(N^2)
      * Create a new set that is the difference of this set and otherSet. 
      * Return an ISet of elements that are in this Set but not in otherSet. 
      * Also called the relative complement. 

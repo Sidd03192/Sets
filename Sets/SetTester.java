@@ -2,7 +2,7 @@
 /*
  * Student information for assignment:
  *
- * Number of slip days used:
+ * Number of slip days used: 2
  * Student 1 (Student whose turnin account is being used)
  *  UTEID: sp55697
  *  email address: sidddharthpotta@gmail.com
@@ -24,11 +24,62 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 
 /*
  * CS 314 Students, put your results to the experiments and answers to questions
- * here: CS314 Students, why is it unwise to implement all three of the
+ * here:
+ *  Experiment Results - 
+Unsorted Set -------------------------------------------------------
+File                                Size (kb)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time   Inc. Prev. Row
+Our Story Book                      842         17142         -                4612           -                0.141 sec.     -
+The Adventures of Grandfather Frog  980         20104         1.17x            3512           0.76x            0.063 sec.     0.45x
+Old Granny Fox                      1350        26081         1.30x            4231           1.20x            0.102 sec.     1.62x
+Indian Fairy Tales                  3765        74310         2.85x            11797          2.79x            0.654 sec.     6.41x
+
+Sorted Set --------------------------------------------------------
+File                                Size (kb)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time   Inc. Prev. Row
+Our Story Book                      842         17142         -                4612           -                0.067 sec.     -
+The Adventures of Grandfather Frog  980         20104         1.17x            3512           0.76x            0.013 sec.     0.19x
+Old Granny Fox                      1350        26081         1.30x            4231           1.20x            0.048 sec.     3.69x
+Indian Fairy Tales                  3765        74310         2.85x            11797          2.79x            0.209 sec.     4.35x
+
+Java HashSet -------------------------------------------------------
+File                                Size (kb)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time   Inc. Prev. Row
+Our Story Book                      842         17142         -                4612           -                0.022 sec.     -
+The Adventures of Grandfather Frog  980        20104          1.17x            3512           0.76x            0.010 sec.     0.45x
+Old Granny Fox                      1350        26081         1.30x            4231           1.20x            0.011 sec.     1.10x
+Indian Fairy Tales                  3765        74310         2.85x            11797          2.79x            0.040 sec.     3.64x
+
+Java TreeSet -------------------------------------------------------
+File                                Size (kb)   Total Words   Inc. Prev. Row   Unique Words   Inc. Prev. Row   Actual Time   Inc. Prev. Row
+Our Story Book                      842         17142         -                4612           -                0.029 sec.     -
+The Adventures of Grandfather Frog  980         20104         1.17x            3512           0.76x            0.016 sec.     0.55x
+Old Granny Fox                      1350        26081         1.30x            4231           1.20x            0.018 sec.     1.13x
+Indian Fairy Tales                  3765        74310         2.85x            11797          2.79x            0.064 sec.     3.56x
+
+ * Questions : 
+ * Question 1: Sorted Set - O(N* M)
+ *             Unsorted Set - O(N * M)
+ *             HashSet - O(N)
+ *             TreeSet - O(NlogM)
+ * Question 2: The BIG O of Unsorted Set Add is O(N). This is the same for Unsorted Set. 
+ *             The BIg o of add for HashSet is likley O(1) and for Tree Set is O(log N). This is
+ *             problably because HashSet uses a hash data structure and tree set uses a tree data structure.
+ *             The timing data supports this too.
+ * Question 3: HashSet will print out the contents in a random order, while tree set prints the 
+ *             contents in a sorted order.
+ * 
+ * 
+ * 
+ * 
+ *  CS314 Students, why is it unwise to implement all three of the
  * intersection, union, and difference methods in the AbstractSet class:
+ *  It would be wise to implement them all because they use other methods (Union, Intersection,
+ *  and Difference) that of the current object which is not only inneficient but( for union I had to call 
+ *  this.difference just so I would have an ISet to return ) but it would be hard to implement them all becuase
+ *  they each rely on eachother and if the ISet was of a type which didn't have all the other methods, it would 
+ * call the abstract set methods for Union, INtersectoin and Difference, which would rely on eachother. 
  */
 
 public class SetTester {
@@ -235,22 +286,22 @@ public class SetTester {
         actual = s1.equals(null);
         showTestResults(actual, false, 24, s1, null, "equals methods SortedSet - other Object is null");
 
-        // CS314 Students. Uncomment this section when ready to
-        // run your experiments
-        // try {
-        // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        // }
-        // catch(Exception e) {
-        // System.out.println("Unable to change look and feel");
-        // }
-        // Scanner sc = new Scanner(System.in);
-        // String response = "";
-        // do {
-        // largeTest();
-        // System.out.print("Another file? Enter y to do another file: ");
-        // response = sc.next();
-        // } while( response != null && response.length() > 0
-        // && response.substring(0,1).equalsIgnoreCase("y") );
+        //CS314 Students. Uncomment this section when ready to
+        //run your experiments
+        try {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch(Exception e) {
+        System.out.println("Unable to change look and feel");
+        }
+        Scanner sc = new Scanner(System.in);
+        String response = "";
+        do {
+        largeTest();
+        System.out.print("Another file? Enter y to do another file: ");
+        response = sc.next();
+        } while( response != null && response.length() > 0
+        && response.substring(0,1).equalsIgnoreCase("y") );
 
     }
 
