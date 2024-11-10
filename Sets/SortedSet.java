@@ -1,20 +1,20 @@
 /*  Student information for assignment:
-*
-*  On <MY> honor, <Siddharth Potta > ), 
-*  this programming assignment is <MY> own work
-*  and <I> have not provided this code to any other student.
-*
-*  Number of slip days used: 2
-*
-*  Student 1 (Student whose Canvas account is being used)
-*  UTEID: sp55697
-*  email address: siddharthpotta@gmail.com
-*  TA name: Bersam
-*  
-*  Student 2 
-*  UTEID:
-*  email address:   
-*/
+ *
+ *  On <MY> honor, <Siddharth Potta > , <Samhith Konyala>
+ *  this programming assignment is <MY> own work
+ *  and <We> have not provided this code to any other student.
+ *
+ *  Number of slip days used: 0
+ *
+ *  Student 1 (Student whose Canvas account is being used)
+ *  UTEID: sp55697
+ *  email address: siddharthpotta@gmail.com
+ *  TA name: Bersam
+ *
+ *  Student 2
+ *  UTEID: sk62423
+ *  email address: samhith.konyala@gmail.com
+ */
 
 import java.util.Iterator;
 import java.lang.reflect.Array;
