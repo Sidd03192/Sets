@@ -89,205 +89,139 @@ public class SetTester {
 
     public static void main(String[] args) {
 
-        ISet<String> s1 = new UnsortedSet<>();
+        ISet<String> s1 = new UnsortedSet<>() ;
+        s1.add("B");
+        s1.add("D");
+        s1.add("D");
         s1.add("A");
         s1.add("C");
-        s1.add("A");
-        s1.add("B");
-
-        // test 1
+        // Student test 1 contains
         boolean actual = s1.contains("A");
         showTestResults(actual, true, 1, s1, null, "add and contains methods UnsortedSet"
                 + "/nset 1 contains A.");
-
-        // test 2
-        s1.remove("A");
-        actual = s1.contains("A");
-        showTestResults(actual, false, 2, s1, null, "remove and contains method UnsortedSet"
-                + "/nset1 does not contain A.");
-
-        // test 3
-        actual = s1.size() == 2;
-        showTestResults(actual, true, 3, s1, null, "size method UnsortedSet"
+        // Student test 2 size
+        actual = s1.size() == 4;
+        showTestResults(actual, true, 2, s1, null, "size method UnsortedSet"
                 + "/nsize of set 1 is 2.");
-
-        ISet<String> s2 = new UnsortedSet<>();
+        ISet<String> s2 = new SortedSet<>();
         s2.add("C");
         s2.add("A");
         s2.add("B");
-
-        // test 4
-        actual = s2.containsAll(s1);
-        showTestResults(actual, true, 4, s1, s2, "containsAll method UnsortedSet"
+        actual = s2.add("B");
+        // Student test 3 add
+        showTestResults(actual, false, 3, null, s2, "add method UnsortedSet"
                 + "/ns2 contains all of s1.");
+        // Student test 4 clear
+        s1.clear();
+        actual = s1.size() == 0;
 
-        // test 5
-        actual = s1.containsAll(s2);
-        showTestResults(actual, false, 5, s1, s2, "containsAll method UnsortedSet"
+        showTestResults(actual, true, 4, s1, s2, "clear method UnsortedSet"
                 + "/ns1 contains all of s2.");
-
-        // test 6
-        ISet<String> s3 = s2.difference(s1);
-        ISet<String> expected = new UnsortedSet<>();
-        expected.add("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 6, s1, s2, "difference and equals methods UnsortedSet"
-                + "/ns2.difference(s1). result = " + s3 + " expected result = " + expected);
-
-        // test 7
-        s3 = s2.union(s1);
-        expected.add("B");
-        expected.add("C");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 7, s1, s2, "union and equals methods UnsortedSet"
-                + "/ns2.union(s1). actual result = " + s3
-                + " expected result = " + expected);
-
-        // test 8
-        s3 = s2.intersection(s1);
-        expected.remove("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 8, s1, s2, "intersection and equals methods UnsortedSet"
-                + "/ns2.intersection(s1). actual result = " + s3
-                + " expected result = " + expected);
-
-        // sorted sets
+        //Student test 5 addAll
+        actual = s1.addAll(s2);
+        showTestResults(actual, true, 5, s1, s2, "addAll method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 6 containsAll
+        actual = s1.containsAll(s2);
+        showTestResults(actual, true, 6, s1, s2, "containsAll method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 7 Union
+        ISet<String> s3 = new UnsortedSet<>();
+        s3.add("U");
+        s3.add("Y");
+        s3.add("I");
+        s3.add("U");
+        s3.add("L");
+        actual = s1.union(s3).size() == 7;
+        showTestResults(actual, true, 7, s1, s2, "Union method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 8 Intersection
+        actual = s1.intersection(s3).size() == 0;
+        showTestResults(actual, true, 8, s1, s2, "Interesection method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 9 Difference;
+        actual = s1.difference(s2).size() == 0;
+        showTestResults(actual, true, 9, s1, s2, "Difference method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 10 Difference;
+        s1.remove("D");
+        actual = s1.size() == 3;
+        showTestResults(actual, true, 10, s1, s2, "Remove method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 11 Difference;
+        actual = s1.equals(s2);
+        showTestResults(actual, true, 11, s1, s2, "Equals method UnsortedSet"
+                + "/ns1 contains all of s2.");
         s1 = new SortedSet<>();
         s1.add("A");
-        s1.add("C");
-        s1.add("A");
-        s1.add("B");
+        s1.add("F");
+        s1.add("G");
+        s1.add("H");
+        s1.add("J");
 
-        // test 9
-        actual = s1.contains("A");
-        showTestResults(actual, true, 9, s1, null, "add and contains methods SortedSet"
+        // Student test 12 contains
+        actual = s1.contains("J");
+        showTestResults(actual, true, 12, s1, null, "add and contains methods UnsortedSet"
                 + "/nset 1 contains A.");
 
-        // test 10
-        s1.remove("A");
-        actual = s1.contains("A");
-        showTestResults(actual, false, 10, s1, null, "remove and contains method SortedSet"
-                + "/nset1 does not contain A.");
 
-
-        // test 11
-        actual = s1.size() == 2;
-        showTestResults(actual, true, 11, s1, null, "size method SortedSet"
+        // Student test 13 size
+        actual = s1.size() == 5;
+        showTestResults(actual, true, 13, s1, null, "size method UnsortedSet"
                 + "/nsize of set 1 is 2.");
-
         s2 = new SortedSet<>();
+        s2.add("I");
         s2.add("C");
         s2.add("A");
-        s2.add("B");
-
-        // test 12
-        actual = s2.containsAll(s1);
-        showTestResults(actual, true, 12, s1, s2, "containsAll method SortedSet"
+        actual = s2.add("B");
+        // Student test 14 add
+        showTestResults(actual, true, 14, null, s2, "add method UnsortedSet"
                 + "/ns2 contains all of s1.");
-
-        // test 13
-        actual = s1.containsAll(s2);
-        showTestResults(actual, false, 13, s1, s2, "containsAll method SortedSet"
+        // Student test 15 clear
+        s1.clear();
+        actual = s1.size() == 0;
+        showTestResults(actual, true, 15, s1, s2, "clear method UnsortedSet"
                 + "/ns1 contains all of s2.");
-
-        // test 14
-        s3 = s2.difference(s1);
-        expected = new SortedSet<>();
-        expected.add("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 14, s1, s2, "difference and equals methods SortedSet"
-                + "/ns2.difference(s1). result = " + s3 + " expected result = " + expected);
-
-        // test 15
-        s3 = s1.difference(s2);
-        expected = new SortedSet<>();
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 14, s1, s2, "difference and equals methods SortedSet"
-                + "/ns1.difference(s2). result = " + s3 + " expected result = " + expected);
-
-        // test 16
-        s3 = s1.union(s2);
-        expected = new SortedSet<>();
-        expected.add("A");
-        expected.add("B");
-        expected.add("C");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 16, s1, s2, "union and equals methods SortedSet"
-                + "/ns2.union(s1). actual result = " + s3
-                + " expected result = " + expected);
-
-
-        // test 17
-        s3 = s1.intersection(s2);
-        expected.remove("A");
-        actual = s3.equals(expected);
-        showTestResults(actual, true, 17, s1, s2, "intersection and equals methods SortedSet"
-                + "/ns1.intersection(s2). actual result = " + s3
-                + " expected result = " + expected);
-
-        // test 18
         s1.add("A");
-        Iterator<String> it1 = s1.iterator();
-        Iterator<String> it2 = s2.iterator();
-        boolean good = true;
-        while (good && it1.hasNext()) {
-            good = it1.next().equals(it2.next());
-        }
-        showTestResults(good, true, 18, s1, s2, "iterator and add methods SortedSet."
-                + "\nChecked all elements equal via iterators.");
-
-        // test 19
-        s1 = new UnsortedSet<>();
-        UnsortedSet<Integer> si1 = new UnsortedSet<>();
-        actual = si1.equals(s1);
-        showTestResults(actual, true, 19, s1, s2, "equals methods UnsortedSet"
-                + "\ns2.equals(s1), both sets empty");
-
-        // test 20
-        s1.add("is");
-        s1.add("a");
-        si1.add(12);
-        si1.add(13);
-        si1.add(12);
-        actual = si1.equals(s1);
-        showTestResults(actual, false, 20, si1, null, "equals methods UnsortedSet"
-                + "\ns2.equals(s1), different data types of elements");
-
-        // test 21
-        ArrayList<Integer> ar = new ArrayList<>();
-        ar.add(12);
-        ar.add(13);
-        actual = si1.equals(ar);
-        showTestResults(actual, false, 20, si1, null, "equals methods UnsortedSet"
-                + "\nsi1.equals(anArrayList), other Object is not a set");
-
-        // test 22
-        Object obj1 = s1;
-        s2 = new UnsortedSet<>();
-        s2.add("a");
-        s2.add("is");
-        Object obj2 = s2;
-        actual = obj1.equals(obj2);
-        showTestResults(actual, true, 22, s1, s2, "equals methods UnsortedSet"
-                + "\nVerify equals overridden and not overloaded.");
-
-        // test 23
-        s1 = new SortedSet<>();
-        s1.add("A");
-        s1.add("A");
-        s1.add("B");
-        ISet<Integer> ss2 = new SortedSet<>();
-        ss2.add(12);
-        ss2.add(15);
-        ss2.add(12);
-        ss2.add(15);
-        actual = s1.equals(ss2);
-        showTestResults(actual, false, 23, s1, null, "equals methods SortedSet - different types"
-                + "\nsecond set contains Integers: " + ss2);
-
-        // test 24
-        actual = s1.equals(null);
-        showTestResults(actual, false, 24, s1, null, "equals methods SortedSet - other Object is null");
+        s1.add("F");
+        s1.add("U");
+        s1.add("H");
+        s1.add("J");
+        //Student test 16 addAll
+        actual = s1.addAll(s2);
+        showTestResults(actual, true, 16, s1, s2, "addAll method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 17 containsAll
+        actual = s1.containsAll(s2);
+        showTestResults(actual, true, 17, s1, s2, "containsAll method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 18 Union
+        s3 = new SortedSet<>();
+        s3.add("U");
+        s3.add("Y");
+        s3.add("I");
+        s3.add("U");
+        s3.add("L");
+        actual = s1.union(s3).size() == 10;
+        showTestResults(actual, true, 18, s1, s2, "Union method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 19 Intersection
+        actual = s1.intersection(s3).size() == 2;
+        showTestResults(actual, true, 19, s1, s2, "Interesection method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 20 Difference;
+        actual = s1.difference(s2).size() == 4;
+        showTestResults(actual, true, 20, s1, s2, "Difference method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 21 Remove;
+        s1.remove("A");
+        actual = s1.size() == 7;
+        showTestResults(actual, true, 21, s1, s2, "Remove method UnsortedSet"
+                + "/ns1 contains all of s2.");
+        //Student test 22 Equals;
+        actual = s1.equals(s2);
+        showTestResults(actual, false, 22, s1, s2, "Equals method UnsortedSet"
+                + "/ns1 contains all of s2.");
 
         //CS314 Students. Uncomment this section when ready to
         //run your experiments
